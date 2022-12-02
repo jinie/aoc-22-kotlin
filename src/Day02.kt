@@ -13,9 +13,9 @@ fun main(){
         )
         val states = mapOf("X" to 0,"Y" to 3,"Z" to 6)
 
-        return input.map { it.trim().split((" ")) }.map {
+        return input.map { it.trim().split((" ")) }.sumOf {
             states[it.last()]!!.plus(results[it.last()]!![it.first()]!!)
-        }.sum()
+        }
     }
 
     // |   | A | B | C |
