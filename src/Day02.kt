@@ -2,9 +2,21 @@ fun main(){
     // X, A = Rock
     // Y, B = Paper
     // Z, C = Scissors
-
-
     val points = mapOf("A" to 1, "X" to 1, "B" to 2, "Y" to 2, "C" to 3, "Z" to 3)
+
+    fun part2(input: List<String>): Int{
+
+        val results = mapOf(
+            "X" to mapOf("A" to 3,"B" to 1,"C" to 2),
+            "Z" to mapOf("A" to 2,"B" to 3,"C" to 1),
+            "Y" to mapOf("A" to 1,"B" to 2,"C" to 3)
+        )
+        val states = mapOf("X" to 0,"Y" to 3,"Z" to 6)
+
+        return input.map { it.trim().split((" ")) }.map {
+            states[it.last()]!!.plus(results[it.last()]!![it.first()]!!)
+        }.sum()
+    }
 
     // |   | A | B | C |
     // | X | 3 | 0 | 6 |
@@ -19,7 +31,7 @@ fun main(){
         )
 
         return input.map { it.trim().split((" ")) }.sumOf {
-            states[it.first()]!!.get(it.last())!! + points[it.last()]!!
+            states[it.first()]!![it.last()]!! + points[it.last()]!!
         }
 
     }
@@ -30,5 +42,6 @@ fun main(){
     measureTimeMillisPrint {
         val input = readInput("Day02")
         println("Part 1: "+part1(input).toString())
+        println("Part 2: "+part2(input).toString())
     }
 }
