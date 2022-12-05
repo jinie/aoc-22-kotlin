@@ -33,7 +33,6 @@ fun main(){
         return input.map { it.trim().split((" ")) }.sumOf {
             states[it.first()]!![it.last()]!! + points[it.last()]!!
         }
-
     }
 
     val testInput = readInput("Day02_test")
