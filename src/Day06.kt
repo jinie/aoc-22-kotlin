@@ -4,7 +4,7 @@ class Day06() {
             if(input.substring(idx,idx+length).toSet().size == length)
                 return idx + length
         }
-        return -1
+        throw Exception("Not found")
     }
 
     fun part1(input: String): Int{
@@ -19,7 +19,8 @@ class Day06() {
 fun main(){
     val input = readInput("Day06").joinToString("")
     measureTimeMillisPrint {
-        println(Day06().part1(input))
-        println(Day06().part2(input))
+        val d = Day06()
+        println(d.part1(input))
+        println(d.part2(input))
     }
 }
