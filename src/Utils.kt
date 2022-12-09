@@ -84,6 +84,10 @@ data class Point2d(var x: Int, var y: Int) {
         return (1..steps).scan(this) { last, _ -> Point2d(last.x + xDelta, last.y + yDelta) }
     }
 
+    inline fun chebyshevDistance(that: Point2d): Int{
+        return maxOf((x - that.x).absoluteValue, (y - that.y).absoluteValue)
+    }
+
 
     fun neighbors(): List<Point2d> =
         listOf(
@@ -108,6 +112,28 @@ data class Point2d(var x: Int, var y: Int) {
             Point2d(x + 1, y - 1),
             Point2d(x + 1, y + 1)
         )
+
+    fun times(times: Int): List<Point2d> {
+        return (1..times).map { this }
+    }
+
+    fun plus(that: Point2d): Point2d {
+        return Point2d(x + that.x, y + that.y)
+    }
+
+    fun minus(that: Point2d): Point2d {
+        return Point2d(x - that.x, y - that.y)
+    }
+
+    fun compareTo(that: Point2d): Int {
+        return when {
+            y < that.y -> -1
+            y > that.y -> 1
+            x < that.x -> -1
+            x > that.x -> 1
+            else -> 0
+        }
+    }
 }
 
 infix fun IntRange.intersects(other: IntRange): Boolean =
