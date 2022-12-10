@@ -11,7 +11,6 @@ class Day10 {
                 cycles = 2
                 pendingInstructions.add(Pair(cycle + 2, instruction.substring(5).toInt()))
             }
-
             "noop" -> cycles = 1
         }
         return cycles
@@ -48,8 +47,6 @@ class Day10 {
                     displayLines.add(currentLine)
                     currentLine = ""
                 }
-
-
             }
         }
         displayLines.forEach { println(it) }
