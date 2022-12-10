@@ -57,7 +57,9 @@ fun main() {
     val testInput = readInput("Day10_test")
     check(Day10().part1(testInput) == 13140)
 
-    val input = readInput("Day10")
-    println(Day10().part1(input))
-    Day10().part2(input)
+    measureTimeMillisPrint {
+        val input = readInput("Day10")
+        println(Day10().part1(input))
+        Day10().part2(input)
+    }
 }
