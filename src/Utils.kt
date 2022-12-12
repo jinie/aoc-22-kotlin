@@ -9,6 +9,8 @@ import kotlin.math.sign
  */
 fun readInput(name: String) = File("src/resources", "$name.txt").readLines()
 
+fun readInputString(name: String) = File("src/resources", "$name.txt").readText()
+
 /**
  * Converts string to md5 hash.
  */
