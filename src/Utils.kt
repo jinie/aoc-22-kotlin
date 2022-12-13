@@ -86,7 +86,7 @@ data class Point2d(var x: Int, var y: Int) {
         return (1..steps).scan(this) { last, _ -> Point2d(last.x + xDelta, last.y + yDelta) }
     }
 
-    inline fun chebyshevDistance(that: Point2d): Int{
+    fun chebyshevDistance(that: Point2d): Int{
         return maxOf((x - that.x).absoluteValue, (y - that.y).absoluteValue)
     }
 

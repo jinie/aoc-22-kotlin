@@ -1,4 +1,4 @@
-class Day06() {
+class Day06 {
     private fun parse(input: String, length: Int): Int{
         for(idx in 0..input.length-length){
             if(input.substring(idx,idx+length).toSet().size == length)
