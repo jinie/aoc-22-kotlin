@@ -3,6 +3,7 @@ import java.math.BigInteger
 import java.security.MessageDigest
 import kotlin.math.absoluteValue
 import kotlin.math.sign
+import kotlin.math.abs
 
 /**
  * Reads lines from the given input txt file.
@@ -70,6 +71,15 @@ private fun allNeighbours(values: List<List<Int>>, y: Int, x: Int): List<Pair<In
         .filter { (y, x) -> y in values.indices && x in values.first().indices }
 }
 
+fun IntRange.contains(b: IntRange): Boolean {
+    return this.first <= b.first && b.last <= this.last
+}
+
+fun IntRange.overlaps(b: IntRange): Boolean {
+    return this.contains(b.first) || this.contains(b.last) || b.contains(this.first)
+}
+
+
 /**
  * Grid helper class, from
  * https://todd.ginsberg.com/post/advent-of-code/2021/
@@ -88,6 +98,10 @@ data class Point2d(var x: Int, var y: Int) {
 
     fun chebyshevDistance(that: Point2d): Int{
         return maxOf((x - that.x).absoluteValue, (y - that.y).absoluteValue)
+    }
+
+    fun manhattanDistance(that: Point2d): Int {
+        return(abs(this.x - that.x) + abs(this.y-that.y))
     }
 
 
@@ -119,11 +133,11 @@ data class Point2d(var x: Int, var y: Int) {
         return (1..times).map { this }
     }
 
-    fun plus(that: Point2d): Point2d {
+    operator fun plus(that: Point2d): Point2d {
         return Point2d(x + that.x, y + that.y)
     }
 
-    fun minus(that: Point2d): Point2d {
+    operator fun minus(that: Point2d): Point2d {
         return Point2d(x - that.x, y - that.y)
     }
 
