@@ -15,16 +15,16 @@ private class Day15(val lines: List<String>) {
     fun findOpenSpot(i: Int): Long {
         val notHereRanges = mutableSetOf<IntRange>()
         for (s in beaconDistance) {
-            val sesorLoc = s.first
+            val sensorLocation = s.first
 
-            val dSToI = i - sesorLoc.y
+            val dSToI = i - sensorLocation.y
             val total = s.second
             if (abs(dSToI) > total)
                 continue
 
             val y = dSToI
             val dx = total - abs(y)
-            val notHereRange = -dx + sesorLoc.x..dx + sesorLoc.x
+            val notHereRange = -dx + sensorLocation.x..dx + sensorLocation.x
             notHereRanges.add(notHereRange)
         }
 
@@ -40,7 +40,7 @@ private class Day15(val lines: List<String>) {
             }
 
             if (bigRange.overlaps(r) || bigRange.last + 1 == r.first) {
-                bigRange = min(bigRange.start, r.start)..max(bigRange.last, r.last)
+                bigRange = min(bigRange.first, r.first)..max(bigRange.last, r.last)
             } else {
                 return bigRange.last + 1.toLong()
             }
@@ -51,17 +51,17 @@ private class Day15(val lines: List<String>) {
     fun part1(targetY: Int): Long {
         val notHereRange = mutableSetOf<IntRange>()
         beaconDistance.forEach { s ->
-            for (s in beaconDistance) {
-                val sesorLoc = s.first
-                val total = s.second
-                if (abs(targetY - sesorLoc.y) > total) {
+            for (sensor in beaconDistance) {
+                val sensorLocation = sensor.first
+                val total = sensor.second
+                if (abs(targetY - sensorLocation.y) > total) {
                     continue
                 }
-                val dx = total - abs(targetY - sesorLoc.y)
-                notHereRange.add(-dx + sesorLoc.x..dx + sesorLoc.x)
+                val dx = total - abs(targetY - sensorLocation.y)
+                notHereRange.add(-dx + sensorLocation.x..dx + sensorLocation.x)
             }
         }
-        val lineII = notHereRange.flatMap { it }.distinct()
+        val lineII = notHereRange.flatten().distinct()
         val beaconsI = sensors.map { it.second }.filter { it.y == targetY }.distinct()
         return lineII.size - beaconsI.size.toLong()
     }
