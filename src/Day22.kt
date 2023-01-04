@@ -1,6 +1,6 @@
 class Day22(input: List<String>) {
 
-    private val blockedPlaces: Set<Point2d> = parseBlockedPlaces(input)
+    private val blockedPlaces = parseBlockedPlaces(input)
     private val instructions: List<Instruction> = Instruction.ofList(input)
 
     fun solvePart1(): Int =
@@ -310,6 +310,8 @@ class Day22(input: List<String>) {
 }
 
 fun main() {
+    /*val testInput = readInput("Day22_test")
+    check(Day22(testInput).solvePart1() == 5031)*/
     measureTimeMillisPrint {
         val input = readInput("Day22")
         val d22 = Day22(input)
